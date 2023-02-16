@@ -1,0 +1,2 @@
+# Sedna
+kill katakana

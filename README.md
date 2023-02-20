@@ -3,7 +3,7 @@ kill katakana
 
 Primarily designed for searching Japanese proper nouns, which are often written in katakana and can be confusing.
 
-TODO: langrage select
+TODO: language select
 
 TODO: search history
 

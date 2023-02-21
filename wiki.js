@@ -125,9 +125,8 @@ const getOtherLng = async(serch) => {
 var card_template = `
 <div class="card m-3" style="width: 18rem;">
 <div class="card-body">
-  <h5 class="card-title">dynamictitle</h5>
+  <h5 class="card-title"><a href="dynamiclink" class="card-link">dynamictitle</a></h5>
   <p class="card-text">dynamictext</p>
-  <a href="dynamiclink" class="card-link">link</a>
 </div>
 </div>
 `;
@@ -187,8 +186,8 @@ function excute_search(search) {
 
                 // save search
                 keys = Object.keys(localStorage);
-                if (!(formData.get('q') in keys)) {
-                    localStorage.setItem(formData.get('q'), Date.now());
+                if (!(search in keys)) {
+                    localStorage.setItem(search, Date.now());
                 }
             })
         })

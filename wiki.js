@@ -1,3 +1,28 @@
+// read search
+$(document).ready(function() {
+
+    let data = Object.keys(localStorage);
+    console.log(data);
+    data.forEach((element, index) => {
+        let html = "<div type='button' class='hidden_tag row m-1 btn btn-outline-secondary'>" + element + "</div>";
+        $("#history").append(html);
+    });
+});
+
+function allStorageDate() {
+
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while (i--) {
+        values.push(localStorage.getItem(keys[i]));
+    }
+
+    return values;
+}
+
+
 const form = document.getElementById('search-form');
 const searchContainer = document.getElementById('search-lang-results');
 const othersContainer = document.getElementById('search-lang-results');
@@ -107,13 +132,28 @@ var card_template = `
 </div>
 `;
 
-
+var SEARCH_INPUT = ''
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // prevent form from submitting normally
 
     const formData = new FormData(form);
+    SEARCH_INPUT = formData.get('q');
+    excute_search(SEARCH_INPUT);
 
-    getFirstLng(formData.get('q')).then(result => {
+
+});
+
+
+$(document).on('click', '.hidden_tag', function() {
+
+    SEARCH_INPUT = $(this).html();
+    excute_search(SEARCH_INPUT);
+
+    $("input").val(SEARCH_INPUT);
+});
+
+function excute_search(search) {
+    getFirstLng(search).then(result => {
             console.log(result);
 
             card_first = card_template.replace('dynamictext', result.snippet);
@@ -144,9 +184,15 @@ form.addEventListener('submit', (event) => {
                         });
                     }
                 });
+
+                // save search
+                keys = Object.keys(localStorage);
+                if (!(formData.get('q') in keys)) {
+                    localStorage.setItem(formData.get('q'), Date.now());
+                }
             })
         })
         .catch(error => {
             console.error(error);
         });
-});
+}

@@ -5,6 +5,8 @@ Primarily designed for searching Japanese proper nouns, which are often written 
 
 TODO: language select
 
+TODO：export the history
+
 TODO: search history ✔
 
 version 0.1: Search for Katakana and display links to Wikipedia pages in Japanese, English, and Chinese.
